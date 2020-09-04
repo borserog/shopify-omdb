@@ -1,0 +1,50 @@
+.container {
+  display: flex;
+  flex-flow: row wrap;
+  border: 2px solid red;
+
+  & > * {
+    border: 1px solid blue;
+    padding: 3rem;
+
+  }
+
+  .listing {
+    flex: 70;
+
+    ul {
+      list-style: none;
+
+      li {
+        margin: 1rem;
+
+        & > * {
+          margin: .5rem;
+        }
+      }
+    }
+  }
+
+  .filter {
+    width: 100%;
+  }
+
+  .nominated {
+    flex: 30;
+
+    ul {
+      list-style: none;
+
+      li {
+        display: flex;
+        width: 100%;
+        margin: 1rem;
+        justify-content: space-between;
+
+        & > * {
+          margin: .5rem;
+        }
+      }
+    }
+  }
+}

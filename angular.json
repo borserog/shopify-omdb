@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "shopify-omdb"
+    }
+  },
+  "defaultProject": "shopify-omdb",
+  "cli": {
+    "analytics": "e42f2700-d6c7-49dc-a9f7-98b1e8885526"
+  }
 }
