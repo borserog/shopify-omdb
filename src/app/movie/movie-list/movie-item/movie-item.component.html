@@ -1,0 +1,28 @@
+<div class="movie-card">
+  <div class="movie-card__image">
+    <img
+      class="movie-card__image--poster"
+      *ngIf="movie.poster.length > 10; else invalidPoster"
+      [src]="movie.poster"
+      [alt]="movie.title"
+    />
+    <ng-template #invalidPoster>
+      <span class="movie-card__image--fallback material-icons"> theaters </span>
+    </ng-template>
+  </div>
+  <div class="movie-card__text">
+    <div class="movie-card__text--title">{{ movie.title }}</div>
+    <div class="movie-card__text--year">{{ movie.year }}</div>
+  </div>
+  <button
+    type="button"
+    [disabled]="isLimitReached || isNominated"
+    class="movie-card__button movie-card__button--nominate"
+    (click)="nominate()"
+  >
+    Nominate
+  </button>
+</div>
+<!-- [checked]="isMovieSelected(movie.imdbID)" -->
+<!-- [disabled]="isSelectionDisabled() && !thisCheckbox.checked" -->
+<!-- (input)="onMovieCheck($event.target.checked, movie)" -->

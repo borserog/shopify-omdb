@@ -1,35 +1,84 @@
+@import './../styles/abstracts/variables';
+
+main {
+  background: blanchedalmond;
+  height: 100%;
+  overflow: auto;
+}
+
+[class^="section-"] {
+  padding: 5rem;
+
+  & > *:not(:last-child) {
+    margin-bottom: 3rem;
+  }
+}
+
 .container {
   display: flex;
   flex-flow: row wrap;
-  border: 2px solid red;
+  margin: 0 auto;
+  max-width: 120rem;
+  padding: 2rem 0 2rem 0;
 
+  // uncomment to visualize section boundaries
   & > * {
-    border: 1px solid blue;
-    padding: 3rem;
-
+    // border: 1px solid blue;
   }
 
-  .listing {
+  // move to title-section component
+  .section-title {
+    flex: 100;
+  }
+
+  .section-listing {
+    display: flex;
+    flex-flow: column nowrap;
     flex: 70;
 
-    ul {
-      list-style: none;
+    .movie-list {
+      & > *:not(:last-child) {
+       margin-bottom: 3rem;
+      }
 
-      li {
-        margin: 1rem;
+      .page-control {
+        display: flex;
+        justify-content: space-between;
 
-        & > * {
-          margin: .5rem;
+
+        &__btn {
+          height: 3.5rem;
+          width: 3.5rem;
+          border-radius: 50%;
+          transition: all .2s;
+
+          &:hover {
+            background: $color-light-gray;
+          }
+
+          &:active {
+            background: darken($color-light-gray, 15%);
+          }
+
+          &--hidden {
+            visibility: hidden;
+          }
+        }
+
+        &__icon {
+          display: block;
         }
       }
     }
+
+
   }
 
-  .filter {
+  .section-filter {
     width: 100%;
   }
 
-  .nominated {
+  .section-nominated {
     flex: 30;
 
     ul {

@@ -1,0 +1,25 @@
+body {
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+  /*font-size: 16px;*/
+  line-height: 1.7;
+  color: $default-font-color;
+  font-size: $default-font-size;
+}
+
+.heading-primary {
+  &--main {
+    font-size: 5rem;
+  }
+}
+
+.heading-secondary {
+  &--main {
+    line-height: 3rem;
+    font-size: 3rem;
+  }
+  &--sub {
+    font-size: 1.4rem;
+  }
+}
+

@@ -1,39 +1,80 @@
-<div class="container">
-  <div class="filter">
-    <input type="text" #thisInput (input)="onKey($event.target.value)" />
+<main>
+  <div class="container">
+    <section class="section-title">
+      <div class="heading-primary">
+        <h1 class="heading-primary heading-primary--main">
+          OMDB Movie Awards 2020
+        </h1>
+        <span class="heading-primary heading-primary--sub"
+          >Nominate your favorite movies, watch them shine!</span
+        >
+      </div>
+    </section>
+    <section class="section-filter">
+      <div class="heading-secondary">
+        <h2 class="heading-secondary heading-secondary--main">Search</h2>
+        <span class="heading-secondary heading-secondary--sub"
+          >Start searching for registered movies in our database</span
+        >
+      </div>
+      <input
+        type="text"
+        #filterInput
+        [value]="initialQuery"
+        (input)="onInputChange($event.target.value)"
+      />
+    </section>
+    <section class="section-listing">
+      <div class="heading-secondary">
+        <h2 class="heading-secondary heading-secondary--main">Pick</h2>
+        <span class="heading-secondary heading-secondary--sub"
+          >Nominate five movies that really touched you</span
+        >
+      </div>
+      <ng-container *ngIf="movies$ | async as movieItems; else notFound">
+        <div class="movie-list">
+          <div class="page-control">
+            <button
+              [ngClass]="{'page-control__btn--hidden': page <= 1}"
+              class="page-control__btn"
+              type="button"
+              (click)="previousPage(filterInput.value)"
+            >
+              <span class="page-control__icon material-icons">
+                navigate_before
+              </span>
+            </button>
+            <p>
+              Page {{ page }} of {{ getTotalPages(movieItems.totalMovies) }}
+            </p>
+            <button
+              [ngClass]="{'page-control__btn--hidden': page >= getTotalPages(movieItems.totalMovies)}"
+              class="page-control__btn"
+              type="button"
+              (click)="nextPage(filterInput.value)"
+            >
+              <span class="page-control__icon material-icons">
+                navigate_next
+              </span>
+            </button>
+          </div>
+          <div class="movie-item" *ngFor="let movie of movieItems.movies">
+            <app-movie-item
+              [movie]="movie"
+              [isLimitReached]="isNominationLimitReached()"
+              [isNominated]="isMovieNominated(movie)"
+              (movieNominated)="onMovieNominated($event)"
+              (nominatioRemoved)="onNominationRemoved($event)"
+            ></app-movie-item>
+          </div>
+        </div>
+      </ng-container>
+      <ng-template #notFound>
+        <small>No results found</small>
+      </ng-template>
+    </section>
+    <section class="section-nominated">
+      <app-nominated></app-nominated>
+    </section>
   </div>
-  <div class="listing">
-    <ng-container *ngIf="movies$ | async as movies; else carregando">
-      <ul>
-        <li *ngFor="let movie of movies">
-          <input
-          type="checkbox"
-          [checked]="isMovieSelected(movie.imdbID)"
-          [name]="movie.Title"
-          [id]="movie.Title"
-          [disabled]="isSelectionDisabled() && !thisCheckbox.checked"
-          (input)="onMovieCheck($event.target.checked, movie)"
-          #thisCheckbox>
-          <label [for]="movie.Title">{{ movie.Title }}</label>
-        </li>
-      </ul>
-    </ng-container>
-    <ng-template #carregando>
-      <h1>CARREGANDO</h1>
-    </ng-template>
-  </div>
-  <div class="nominated">
-    <ng-container *ngIf="nominatedMovies.length > 0; else empty">
-      <ul>
-        <li *ngFor="let movie of nominatedMovies">
-          {{ movie.Title }}
-          <button (click)="removeNominated(movie.imdbID)">X</button>
-        </li>
-      </ul>
-      <button (click)="clearNominated()">Clear All</button>
-    </ng-container>
-    <ng-template #empty>
-      <small>Start choosing your nominated movies</small>
-    </ng-template>
-  </div>
-</div>
+</main>

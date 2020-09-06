@@ -1,0 +1,20 @@
+<div class="heading-secondary">
+  <h2 class="heading-secondary heading-secondary--main">Submit</h2>
+  <span class="heading-secondary heading-secondary--sub"
+    >Send your nominations and hope for the best</span
+  >
+</div>
+<ng-container *ngIf="nominatedMovies$ | async as nominatedMovies"
+  ><ng-container *ngIf="nominatedMovies.length > 0; else empty">
+    <ul>
+      <li *ngFor="let movie of nominatedMovies">
+        {{ movie.title }}
+        <button (click)="removeNominated(movie)">X</button>
+      </li>
+    </ul>
+    <button (click)="clearNominated()">Clear All</button>
+  </ng-container>
+  <ng-template #empty>
+    <small>--empty--</small>
+  </ng-template></ng-container
+>

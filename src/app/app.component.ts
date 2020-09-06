@@ -1,7 +1,8 @@
-import { MovieService } from './services/movie.service';
-import { Component, OnInit, ViewChild, AfterViewInit } from '@angular/core';
-import { Observable, EmptyError, ReplaySubject, Subject } from 'rxjs';
-import { tap, map, delay, catchError, throttleTime, switchMap, debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { MovieService } from './movie/services/movie.service';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Observable, Subject } from 'rxjs';
+import { tap, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { MovieItem, MovieItems } from './movie/models/MovieItem.model';
 
 @Component({
   selector: 'app-root',
@@ -10,10 +11,12 @@ import { tap, map, delay, catchError, throttleTime, switchMap, debounceTime, dis
 })
 export class AppComponent implements OnInit, AfterViewInit {
   title = 'shopify-omdb';
-  movies$: Observable<any>;
+  movies$: Observable<MovieItems>;
   movieSubject = new Subject();
-  nominatedMovies = [];
   disableSelections = false;
+  initialQuery = 'titanic';
+  page = 1;
+  loading = false;
 
   constructor(
     private movieService: MovieService
@@ -21,54 +24,51 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngOnInit(): void {
     this.movies$ = this.movieSubject.pipe(
+      tap(() => this.loading = true),
       debounceTime(500),
       distinctUntilChanged(),
-      switchMap((queryParam: string) => {
-        return this.movieService.getMovies(queryParam, '10').pipe(
-          map(({ Search: movies }) => movies)
-        );
+      switchMap(([queryParam, numberOfResults]) => {
+        return this.movieService.getMovies(queryParam, numberOfResults.toString());
       }),
     );
   }
 
   ngAfterViewInit(): void {
-    this.movieSubject.next('titanic');
+    this.movieSubject.next([this.initialQuery, this.page]);
   }
 
-  onKey(content: string): void {
-    this.movieSubject.next(content);
+  onInputChange(content: string): void {
+    this.page = 1;
+    this.movieSubject.next([content, this.page]);
   }
 
-  onMovieCheck(state: string, option: any): void {
-    if (state) {
-      this.nominatedMovies.push(option);
-    } else {
-      this.removeNominated(option.imdbID);
-    }
-
-    // todo: turn into an event
-    if (this.nominatedMovies.length >= 5) {
-      this.disableSelections = true;
-    } else {
-      this.disableSelections = false;
-    }
+  isMovieNominated(movie: MovieItem): boolean {
+    return this.movieService.isMovieNominated(movie);
   }
 
-  isMovieSelected(movieId: string): boolean {
-    return this.nominatedMovies.some((movie) => movie.imdbID === movieId);
+  isNominationLimitReached(): boolean {
+    return this.movieService.nominationLimitReached();
   }
 
-  isSelectionDisabled(): boolean {
-    return this.nominatedMovies.length >= 5;
+  onMovieNominated(movie: MovieItem): void {
+    this.movieService.addNominatedMovie(movie);
   }
 
-  removeNominated(movieId: string): void {
-    this.nominatedMovies = this.nominatedMovies.filter((movie) => {
-      return movie.imdbID !== movieId;
-     } );
+  onNominationRemoved(removedMovie: MovieItem): void {
+    return this.movieService.removeNominatedMovie(removedMovie);
   }
 
-  clearNominated(): void {
-    this.nominatedMovies = [];
+  nextPage(filterInput: string): void {
+    this.page++;
+    this.movieSubject.next([filterInput, this.page]);
+  }
+
+  previousPage(filterInput: string): void {
+    this.page--;
+    this.movieSubject.next([filterInput, this.page]);
+  }
+
+  getTotalPages(totalResults: number): number {
+    return Math.ceil(totalResults / 10);
   }
 }

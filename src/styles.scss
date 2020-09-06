@@ -1,4 +1,14 @@
 /* You can add global styles to this file, and also import other style files */
-* {
-  font-family: 'Roboto', sans-serif;
-}
+// @import "abstracts/functions";
+@import "styles/abstracts/mixins";
+@import "styles/abstracts/variables";
+
+@import "styles/base/base";
+// @import "styles/base/animations";
+@import "styles/base/typography";
+@import "styles/base/utilities";
+
+// @import "layout/footer";
+// @import "layout/grid";
+// @import "layout/header";
+// @import "layout/navigation";
