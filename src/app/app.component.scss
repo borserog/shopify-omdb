@@ -1,7 +1,7 @@
 @import './../styles/abstracts/variables';
 
 main {
-  background: blanchedalmond;
+  background: url(../assets/geometry.png);
   height: 100%;
   overflow: auto;
 }
@@ -13,6 +13,7 @@ main {
     background-color: $color-full-white;
     border-radius: $border-radius;
     margin: 1rem;
+    box-shadow: 1px 1px 20px rgba(0,0,0,.3);
   }
 
   & > *:not(:last-child) {

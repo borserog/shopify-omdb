@@ -7,7 +7,7 @@
 }
 
 .movie-card {
-  width: 80%;
+  width: 90%;
   margin: 0 auto;
   border-radius: $border-radius;
   background: $color-full-white;
@@ -24,11 +24,13 @@
   }
 
   &__text {
+    align-self: flex-start;
     flex: 60;
     padding: 2rem;
 
     &--title {
       font-weight: 800;
+      font-size: 2rem;
     }
   }
 
