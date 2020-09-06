@@ -14,14 +14,19 @@
     <div class="movie-card__text--title">{{ movie.title }}</div>
     <div class="movie-card__text--year">{{ movie.year }}</div>
   </div>
-  <button
-    type="button"
-    [disabled]="isLimitReached || isNominated"
-    class="movie-card__button movie-card__button--nominate"
-    (click)="nominate()"
-  >
-    Nominate
-  </button>
+  <div class="movie-card__button">
+    <button
+      type="button"
+      [disabled]="isLimitReached || isNominated"
+      [title]=""
+      class="movie-card__button--nominate"
+      (click)="nominate()"
+    >
+    <span class="movie-card__button--icon material-icons">
+      add
+      </span>
+    </button>
+  </div>
 </div>
 <!-- [checked]="isMovieSelected(movie.imdbID)" -->
 <!-- [disabled]="isSelectionDisabled() && !thisCheckbox.checked" -->

@@ -1,15 +1,27 @@
 @import '../../../../styles/abstracts/variables';
 @import '../../../../styles/abstracts/mixins';
+@import '../../../../styles//base/animations';
+
+* {
+  transition: all .2s;
+}
 
 .movie-card {
+  width: 80%;
+  margin: 0 auto;
   border-radius: $border-radius;
   background: $color-full-white;
   display: flex;
   flex-flow: row nowrap;
   justify-content: space-between;
   align-items: center;
-  transition: all .2s;
   box-shadow: 1px 1px 20px rgba(0,0,0,.3);
+  border-bottom-right-radius: 8rem;
+  border-top-right-radius: 8rem;
+
+  &:hover {
+    background: darken($color-full-white, 7.5%);
+  }
 
   &__text {
     flex: 60;
@@ -41,43 +53,40 @@
 
   &__button {
     flex: 30;
-    padding: 1rem;
-    margin: 1rem;
-    border: none;
-    cursor: pointer;
-    color: $color-full-white;
-    font-family: 'Roboto';
-    border-radius: $border-radius;
+    display: flex;
+    justify-content: center;
 
-
+    &--icon {
+      display: block;
+      font-size: 3.5rem;
+    }
 
     &--nominate {
+      transition: all .2s;
+      height: 6rem;
+      width: 6rem;
+      padding: 1rem;
+      margin: 3rem;
+      border: none;
+      cursor: pointer;
+      color: $color-full-white;
+      font-family: 'Roboto';
+      border-radius: 50%;
       background: $color-success;
 
-      &:active, &:focus {
-        outline: $color-success auto 2px;
+      &:hover:not(:disabled) {
+        transform: scale(1.05);
       }
 
-      &:hover {
-        background: darken($color-success, 10%);
-      }
-    }
-
-    &--remove {
-      background: $color-error;
-
-      &:active, &:focus {
-        outline: $color-error auto 2px;
+      &:active:not(:disabled), &:focus:not(:disabled) {
+        background: darken($color-success, 15%);
+        transform: scale(0.95);
       }
 
-      &:hover {
-        background: darken($color-error, 10%);
+      &:disabled {
+        background: $color-light-gray;
+        cursor: default;
       }
-    }
-
-    &:disabled {
-      background: $color-light-gray;
-      cursor: default;
     }
   }
 

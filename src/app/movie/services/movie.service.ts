@@ -52,7 +52,7 @@ export class MovieService {
   }
 
   nominationLimitReached(): boolean {
-    return this.nominatedMovies.length > 5;
+    return this.nominatedMovies.length >= 5;
   }
 
   clearNominated(): void {

@@ -7,7 +7,13 @@ main {
 }
 
 [class^="section-"] {
-  padding: 5rem;
+  padding: 3rem;
+
+  &:not(:first-child) {
+    background-color: $color-full-white;
+    border-radius: $border-radius;
+    margin: 1rem;
+  }
 
   & > *:not(:last-child) {
     margin-bottom: 3rem;
@@ -80,20 +86,5 @@ main {
 
   .section-nominated {
     flex: 30;
-
-    ul {
-      list-style: none;
-
-      li {
-        display: flex;
-        width: 100%;
-        margin: 1rem;
-        justify-content: space-between;
-
-        & > * {
-          margin: .5rem;
-        }
-      }
-    }
   }
 }
