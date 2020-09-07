@@ -1,5 +1,7 @@
 import { MovieService } from './../movie/services/movie.service';
 import { Component, OnInit } from '@angular/core';
+import { interval, noop } from 'rxjs';
+import { first, tap, delay, take } from 'rxjs/operators';
 
 @Component({
   selector: 'app-banner',
@@ -22,13 +24,16 @@ export class BannerComponent implements OnInit {
   }
 
   submitNominations(): void {
-    // shame :~
-    setTimeout(() => {
-      this.movieService.clearNominated();
-      this.isSubmitted = true;
-    }, 1500);
-    setTimeout(() => {
-      this.isSubmitted = false;
-    }, 4000);
+    interval(1500).pipe(
+      tap(() => {
+        this.isSubmitted = true;
+        this.movieService.clearNominated();
+      }),
+      delay(2000),
+      tap(() => {
+        this.isSubmitted = false;
+      }),
+      take(1)
+      ).subscribe(noop);
   }
 }
