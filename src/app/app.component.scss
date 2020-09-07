@@ -119,6 +119,10 @@ main {
         grid-template-columns: 1fr 1fr;
         gap: 5rem;
         padding-bottom: 3rem;
+
+        .movie-item {
+          border-radius: $border-radius;
+        }
       }
     }
   }
