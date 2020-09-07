@@ -22,12 +22,13 @@ export class BannerComponent implements OnInit {
   }
 
   submitNominations(): void {
-    this.isSubmitted = true;
+    // shame :~
     setTimeout(() => {
       this.movieService.clearNominated();
+      this.isSubmitted = true;
     }, 1500);
     setTimeout(() => {
       this.isSubmitted = false;
-    }, 2500);
+    }, 4000);
   }
 }
