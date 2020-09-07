@@ -1,7 +1,7 @@
 import { MovieService } from './movie/services/movie.service';
-import { Component, OnInit, AfterViewInit } from '@angular/core';
-import { Observable, Subject } from 'rxjs';
-import { tap, debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+import { Component, OnInit, AfterViewInit, OnDestroy } from '@angular/core';
+import { Observable, Subject, noop } from 'rxjs';
+import { tap, debounceTime, distinctUntilChanged, switchMap, takeUntil } from 'rxjs/operators';
 import { MovieItem, MovieItems } from './movie/models/MovieItem.model';
 
 @Component({
@@ -9,10 +9,11 @@ import { MovieItem, MovieItems } from './movie/models/MovieItem.model';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit, AfterViewInit {
-  title = 'shopify-omdb';
+export class AppComponent implements OnInit, AfterViewInit, OnDestroy {
   movies$: Observable<MovieItems>;
+
   movieSubject = new Subject();
+  onDestroy = new Subject<void>();
   disableSelections = false;
   initialQuery = 'titanic';
   page = 1;
@@ -35,6 +36,10 @@ export class AppComponent implements OnInit, AfterViewInit {
 
   ngAfterViewInit(): void {
     this.movieSubject.next([this.initialQuery, this.page]);
+  }
+
+  ngOnDestroy(): void {
+    this.onDestroy.next();
   }
 
   onInputChange(content: string): void {

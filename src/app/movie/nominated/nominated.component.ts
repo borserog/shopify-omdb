@@ -1,3 +1,4 @@
+import { map } from 'rxjs/operators';
 import { Subject, Observable } from 'rxjs';
 import { MovieService } from './../services/movie.service';
 import { MovieItem } from './../models/MovieItem.model';
@@ -17,6 +18,8 @@ export class NominatedComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+
     this.nominatedMovies$ = this.movieService.nominatedMoviesSubject;
   }
 

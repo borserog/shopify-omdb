@@ -65,6 +65,10 @@
 
     &--nominate {
       transition: all .2s;
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: center;
+      align-items: center;
       height: 6rem;
       width: 6rem;
       padding: 1rem;
@@ -75,6 +79,7 @@
       font-family: 'Roboto';
       border-radius: 50%;
       background: $color-success;
+      backface-visibility: hidden;
 
       &:hover:not(:disabled) {
         transform: scale(1.05);

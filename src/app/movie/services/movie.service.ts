@@ -12,13 +12,17 @@ import { map } from 'rxjs/operators';
 export class MovieService {
   private static readonly API_KEY = '1e66e61d';
   private static readonly RESOURCE_URL = `http://www.omdbapi.com/?apikey=${MovieService.API_KEY}&`;
+  private static readonly LOCAL_STORAGE_KEY = 'omdbNominatedMovies';
 
-  private nominatedMovies: MovieItem[] = [];
+  private nominatedMovies: MovieItem[];
   nominatedMoviesSubject = new BehaviorSubject<MovieItem[]>(this.nominatedMovies);
 
   constructor(
     private http: HttpClient
-  ) { }
+  ) {
+    this.nominatedMovies = JSON.parse(localStorage.getItem(MovieService.LOCAL_STORAGE_KEY));
+    this.nominatedMoviesSubject.next(this.nominatedMovies);
+  }
 
   getMovies(title: string, page: string): Observable<MovieItems> {
     return this.http.get<MoviesDTO>(MovieService.RESOURCE_URL, { params: {
@@ -38,6 +42,7 @@ export class MovieService {
   addNominatedMovie(movie: MovieItem): void {
     this.nominatedMovies.push(movie);
     this.nominatedMoviesSubject.next(this.nominatedMovies);
+    this.nominatedMoviesToLocalStorage();
   }
 
   isMovieNominated(movie: MovieItem): boolean {
@@ -49,6 +54,7 @@ export class MovieService {
       return nominatedMovie.imdbId !== movie.imdbId;
      } );
     this.nominatedMoviesSubject.next(this.nominatedMovies);
+    this.nominatedMoviesToLocalStorage();
   }
 
   nominationLimitReached(): boolean {
@@ -58,9 +64,19 @@ export class MovieService {
   clearNominated(): void {
     this.nominatedMovies = [];
     this.nominatedMoviesSubject.next(this.nominatedMovies);
+    localStorage.removeItem(MovieService.LOCAL_STORAGE_KEY);
   }
 
   getNominatedMovies(): MovieItem[] {
     return [...this.nominatedMovies];
+  }
+
+
+  private nominatedMoviesToLocalStorage(): void {
+    if (this.nominatedMovies.length <= 0) {
+      this.clearNominated();
+    }
+
+    localStorage.setItem(MovieService.LOCAL_STORAGE_KEY, JSON.stringify(this.nominatedMovies));
   }
 }

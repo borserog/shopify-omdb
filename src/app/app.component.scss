@@ -21,6 +21,8 @@ main {
   }
 }
 
+
+
 .container {
   display: flex;
   flex-flow: row wrap;
@@ -87,5 +89,8 @@ main {
 
   .section-nominated {
     flex: 30;
+    position: sticky;
+    top: 2rem;
+    height: 35rem;
   }
 }
