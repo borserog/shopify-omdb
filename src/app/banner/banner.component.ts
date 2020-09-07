@@ -8,6 +8,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class BannerComponent implements OnInit {
   isVisible = true;
+  isSubmitted = false;
 
   constructor(
     private movieService: MovieService
@@ -21,8 +22,12 @@ export class BannerComponent implements OnInit {
   }
 
   submitNominations(): void {
+    this.isSubmitted = true;
     setTimeout(() => {
       this.movieService.clearNominated();
-    }, 1000);
+    }, 1500);
+    setTimeout(() => {
+      this.isSubmitted = false;
+    }, 2500);
   }
 }

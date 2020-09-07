@@ -6,3 +6,13 @@
     <button class="btn-submit" (click)="submitNominations()">Submit</button>
   </div>
 </div>
+
+<div
+  class="submit-banner"
+  *ngIf="isSubmitted"
+  [ngClass]="{ visible: isSubmitted }"
+>
+  <div class="banner-info u-center-text">
+    <span class="info-text">Thank you for your participation!</span>
+  </div>
+</div>
