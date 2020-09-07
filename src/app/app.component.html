@@ -3,12 +3,12 @@
     <section class="section-title">
       <div class="heading-primary">
         <h1 class="heading-primary heading-primary--main">
-          <span class="heading-primary heading-primary--main--span--1">The Shoppies: </span>
-          <span class="heading-primary heading-primary--main--span--2">Movie awards for entrepreneurs</span>
-
+          <span class="heading-primary heading-primary--main--span--1"
+            >The Shoppies
+          </span>
         </h1>
         <span class="heading-primary heading-primary--sub"
-          >Nominate your favorite movies, watch them shine!</span
+          >Movie awards for entrepreneurs</span
         >
       </div>
     </section>
@@ -19,12 +19,16 @@
           >Start searching for registered movies in our database</span
         >
       </div>
-      <input
-        type="text"
-        #filterInput
-        [value]="initialQuery"
-        (input)="onInputChange($event.target.value)"
-      />
+      <div class="search-input">
+        <input
+          class="search-input__field"
+          type="text"
+          #filterInput
+          [value]="initialQuery"
+          (input)="onInputChange($event.target.value)"
+        />
+        <span class="search-input__icon material-icons"> search </span>
+      </div>
     </section>
     <section class="section-listing">
       <div class="heading-secondary">
@@ -34,50 +38,57 @@
         >
       </div>
 
-      <ng-container *ngIf="movies$ | async as movieItems; else notFound">
-        <div class="movie-list">
-          <div class="page-control">
-            <button
-              [ngClass]="{'page-control__btn--hidden': page <= 1}"
-              class="page-control__btn"
-              type="button"
-              (click)="previousPage(filterInput.value)"
-            >
-              <span class="page-control__icon material-icons">
-                navigate_before
-              </span>
-            </button>
-            <p>
-              Page {{ page }} of {{ getTotalPages(movieItems.totalMovies) }}
-            </p>
-            <button
-              [ngClass]="{'page-control__btn--hidden': page >= getTotalPages(movieItems.totalMovies)}"
-              class="page-control__btn"
-              type="button"
-              (click)="nextPage(filterInput.value)"
-            >
-              <span class="page-control__icon material-icons">
-                navigate_next
-              </span>
-            </button>
+      <ng-container *ngIf="movies$ | async as movieItems">
+        <ng-container *ngIf="movieItems.movies?.length > 0; else notFound"
+          ><div class="movie-list">
+            <div class="page-control">
+              <button
+                [ngClass]="{ 'page-control__btn--hidden': page <= 1 }"
+                class="page-control__btn"
+                type="button"
+                (click)="previousPage(filterInput.value)"
+              >
+                <span class="page-control__icon material-icons">
+                  navigate_before
+                </span>
+              </button>
+              <p>
+                Page {{ page }} of {{ getTotalPages(movieItems.totalMovies) }}
+              </p>
+              <button
+                [ngClass]="{
+                  'page-control__btn--hidden':
+                    page >= getTotalPages(movieItems.totalMovies)
+                }"
+                class="page-control__btn"
+                type="button"
+                (click)="nextPage(filterInput.value)"
+              >
+                <span class="page-control__icon material-icons">
+                  navigate_next
+                </span>
+              </button>
+            </div>
+            <div class="movie-item" *ngFor="let movie of movieItems.movies">
+              <app-movie-item
+                [movie]="movie"
+                [isLimitReached]="isNominationLimitReached()"
+                [isNominated]="isMovieNominated(movie)"
+                (movieNominated)="onMovieNominated($event)"
+                (nominatioRemoved)="onNominationRemoved($event)"
+              ></app-movie-item>
+            </div></div
+        ></ng-container>
+        <ng-template #notFound>
+          <div class="u-center-text">
+            <span class="support-text">No results found</span>
           </div>
-          <div class="movie-item" *ngFor="let movie of movieItems.movies">
-            <app-movie-item
-              [movie]="movie"
-              [isLimitReached]="isNominationLimitReached()"
-              [isNominated]="isMovieNominated(movie)"
-              (movieNominated)="onMovieNominated($event)"
-              (nominatioRemoved)="onNominationRemoved($event)"
-            ></app-movie-item>
-          </div>
-        </div>
+        </ng-template>
       </ng-container>
-      <ng-template #notFound>
-        <small>No results found</small>
-      </ng-template>
     </section>
     <section class="section-nominated">
       <app-nominated></app-nominated>
     </section>
+    <app-banner></app-banner>
   </div>
 </main>

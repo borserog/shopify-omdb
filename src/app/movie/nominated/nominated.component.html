@@ -1,20 +1,23 @@
 <div class="heading-secondary">
   <h2 class="heading-secondary--main">Submit</h2>
-  <span class="heading-secondary--sub"
-    >Send them and hope for the best</span
-  >
+  <span class="heading-secondary--sub">Send them and hope for the best</span>
 </div>
-<ng-container *ngIf="nominatedMovies$ | async as nominatedMovies"
-  ><ng-container *ngIf="nominatedMovies.length > 0; else empty">
-    <div class="nominated-movie" *ngFor="let nominatedItem of nominatedMovies">
-      <app-nominated-item [movie]="nominatedItem"></app-nominated-item>
-    </div>
-    <p class="u-center-text">{{ nominatedMovies.length }}/5</p>
-    <button (click)="clearNominated()">Clear All</button>
+<div class="nominated-movies">
+  <ng-container *ngIf="nominatedMovies$ | async as nominatedMovies"
+    ><ng-container *ngIf="nominatedMovies.length > 0; else empty">
+      <div
+        class="nominated-movie"
+        *ngFor="let nominatedItem of nominatedMovies"
+      >
+        <app-nominated-item [movie]="nominatedItem"></app-nominated-item>
+      </div>
+      <p class="u-center-text">{{ nominatedMovies.length }}/5</p>
+      <button class="clear-btn"(click)="clearNominated()">Clear All</button>
+    </ng-container>
+    <ng-template #empty>
+      <div class="u-center-text">
+        <span class="support-text">Start by adding some movies</span>
+      </div>
+    </ng-template>
   </ng-container>
-  <ng-template #empty>
-    <div class="u-center-text">
-      <span class="support-text">Start adding some movies</span>
-    </div>
-  </ng-template>
-</ng-container>
+</div>

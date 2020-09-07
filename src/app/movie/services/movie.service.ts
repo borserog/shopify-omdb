@@ -59,6 +59,7 @@ export class MovieService {
   }
 
   clearNominated(): void {
+    console.log('clear nominated');
     this.nominatedMovies = [];
     this.nominatedMoviesSubject.next(this.nominatedMovies);
     localStorage.removeItem(MovieService.LOCAL_STORAGE_KEY);

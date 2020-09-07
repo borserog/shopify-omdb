@@ -1,4 +1,4 @@
-@import './../styles/abstracts/variables';
+@import "./../styles/abstracts/variables";
 
 main {
   background: url(../assets/geometry.png);
@@ -7,13 +7,12 @@ main {
 }
 
 [class^="section-"] {
-  padding: 3rem;
 
   &:not(:first-child) {
     background-color: $color-full-white;
     border-radius: $border-radius;
-    margin: 1rem;
-    box-shadow: 1px 1px 20px rgba(0,0,0,.3);
+    margin: 1.5rem;
+    box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.3);
   }
 
   & > *:not(:last-child) {
@@ -25,8 +24,8 @@ main {
   display: flex;
   flex-flow: row wrap;
   margin: 0 auto;
-  max-width: 120rem;
-  padding: 2rem 0 2rem 0;
+  max-width: 100rem;
+  padding-bottom: 3rem;
 
   // uncomment to visualize section boundaries
   & > * {
@@ -38,26 +37,62 @@ main {
     flex: 100;
   }
 
+  .section-filter {
+    width: 100%;
+
+    .search-input {
+      display: flex;
+      flex-flow: row nowrap;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 4rem;
+
+      &__field {
+        font-family: "Montserrat", sans-serif;
+        padding-bottom: .5rem;
+        padding-top: .5rem;
+        padding-left: 1rem;
+        width: 100%;
+        max-width: 50rem;
+        font-size: 2.4rem;
+        border: none;
+        border-bottom: 1px solid $color-dark-gray;
+        transition: all .2s;
+
+        &:focus, &:active {
+          outline: none;
+          background: $color-light-gray;
+        }
+      }
+
+      &__icon {
+        display: block;
+        transform: translate(-3.7rem);
+        font-size: 3rem;
+      }
+    }
+  }
+
   .section-listing {
     display: flex;
     flex-flow: column nowrap;
-    flex: 70;
+    flex: 60;
 
     .movie-list {
       & > *:not(:last-child) {
-       margin-bottom: 3rem;
+        margin-bottom: 3rem;
       }
 
       .page-control {
+        padding: 0 10rem;
         display: flex;
         justify-content: space-between;
-
 
         &__btn {
           height: 3.5rem;
           width: 3.5rem;
           border-radius: 50%;
-          transition: all .2s;
+          transition: all 0.2s;
 
           &:hover {
             background: $color-light-gray;
@@ -74,21 +109,20 @@ main {
 
         &__icon {
           display: block;
+          font-size: 2rem;
         }
       }
     }
-
-
-  }
-
-  .section-filter {
-    width: 100%;
   }
 
   .section-nominated {
-    flex: 30;
+    flex: 40;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: center;
     position: sticky;
     top: 1.3rem;
     height: fit-content;
   }
+
 }

@@ -1,0 +1,78 @@
+@import '../../styles/abstracts/variables';
+
+.submit-banner {
+  display: flex;
+  flex-flow: column nowrap;
+  justify-content: space-evenly;
+  align-items: center;
+  position: fixed;
+  top: 88%;
+  left: 50%;
+  transform: translate(-50%, -60%);
+  z-index: 5;
+
+  align-self: center;
+  border-radius: $border-radius;
+  width: 42.6rem;
+  height: 15rem;
+  background: $color-full-white;
+  box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.3);
+
+  .btn-group {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    justify-content: space-evenly;
+
+    .btn-submit, .btn-cancel {
+      border-radius: $border-radius;
+      padding: $btn-padding;
+    }
+
+    .btn-submit {
+      background: $color-blue;
+      color: $color-full-white;
+
+      &:hover {
+        background: darken($color-blue, 5%);
+      }
+
+      &:active {
+        background: darken($color-blue, 15%);
+      }
+    }
+
+    .btn-cancel {
+      &:hover {
+        background: $color-light-gray;
+      }
+
+      &:active {
+        background: darken($color-light-gray, 15%);
+      }
+    }
+  }
+}
+
+.hidden {
+  visibility: hidden;
+}
+
+.visible {
+  animation: appear .5s;
+}
+
+@keyframes appear {
+  0% {
+    transform: translate(-50%, 30%);
+  }
+
+  50% {
+    transform: translate(-50%, -70%);
+  }
+
+  100% {
+    transform: translate(-50%, -60%);
+  }
+}
+

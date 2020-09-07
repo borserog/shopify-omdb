@@ -8,37 +8,38 @@ body {
 }
 
 .heading-primary {
+  padding-left: .5rem;
+
   &--main {
     font-size: 7rem;
+    font-weight: 400;
+    line-height: 9rem;
+
     font-family: 'Playfair Display', serif;
 
     &--span {
       box-decoration-break: clone;
-
-      &--1, &--2 {
-        display: block;
-      }
-
-      &--1 {
-        line-height: 4rem;
-      }
-
-      &--2 {
-        font-weight: 400;
-      }
     }
+  }
+
+  &--sub {
+    padding-left: 1rem;
+    font-size: 3.5rem;
   }
 }
 
 .heading-secondary {
-  margin-bottom: 3rem;
+  padding: 1.5rem 4rem;
+  background-color: mistyrose;
+  border-top-right-radius: $border-radius;
+  border-top-left-radius: $border-radius;
 
   &--main {
-    line-height: 3rem;
-    font-size: 3rem;
+    line-height: 3.5rem;
+    font-size: 2.4rem;
   }
   &--sub {
-    font-size: 1.5rem;
+    font-size: 1.6rem;
   }
 }
 
