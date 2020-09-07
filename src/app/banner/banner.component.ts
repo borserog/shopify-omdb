@@ -25,6 +25,7 @@ export class BannerComponent implements OnInit {
 
   submitNominations(): void {
     interval(1500).pipe(
+      take(1),
       tap(() => {
         this.isSubmitted = true;
         this.movieService.clearNominated();
@@ -33,7 +34,6 @@ export class BannerComponent implements OnInit {
       tap(() => {
         this.isSubmitted = false;
       }),
-      take(1)
       ).subscribe(noop);
   }
 }
