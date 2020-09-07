@@ -69,14 +69,16 @@
                 </span>
               </button>
             </div>
-            <div class="movie-item" *ngFor="let movie of movieItems.movies">
-              <app-movie-item
-                [movie]="movie"
-                [isLimitReached]="isNominationLimitReached()"
-                [isNominated]="isMovieNominated(movie)"
-                (movieNominated)="onMovieNominated($event)"
-                (nominatioRemoved)="onNominationRemoved($event)"
-              ></app-movie-item>
+            <div class="movie-items">
+              <div class="movie-item" *ngFor="let movie of movieItems.movies">
+                <app-movie-item
+                  [movie]="movie"
+                  [isLimitReached]="isNominationLimitReached()"
+                  [isNominated]="isMovieNominated(movie)"
+                  (movieNominated)="onMovieNominated($event)"
+                  (nominatioRemoved)="onNominationRemoved($event)"
+                ></app-movie-item>
+              </div>
             </div></div
         ></ng-container>
         <ng-template #notFound>

@@ -18,13 +18,12 @@
     <button
       type="button"
       [disabled]="isLimitReached || isNominated"
-      [title]=""
+      [ngClass]="{'added': isNominated}"
       class="movie-card__button--nominate"
       (click)="nominate()"
+      *ngIf="!(!isNominated && isLimitReached)"
     >
-    <span class="movie-card__button--icon material-icons">
-      add
-      </span>
+      {{ !isNominated ? 'Add' : 'Added' }}
     </button>
   </div>
 </div>
