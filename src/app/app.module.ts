@@ -7,13 +7,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FilterComponent } from './reusable/filter/filter.component';
 import { MovieItemComponent } from './movie/movie-list/movie-item/movie-item.component';
+import { NominatedItemComponent } from './movie/nominated/nominated-item/nominated-item.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     FilterComponent,
     MovieItemComponent,
-    NominatedComponent
+    NominatedComponent,
+    NominatedItemComponent
   ],
   imports: [
     BrowserModule,

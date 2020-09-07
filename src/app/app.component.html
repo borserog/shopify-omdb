@@ -3,7 +3,9 @@
     <section class="section-title">
       <div class="heading-primary">
         <h1 class="heading-primary heading-primary--main">
-          OMDB Movie Awards 2020
+          <span class="heading-primary heading-primary--main--span--1">The Shoppies: </span>
+          <span class="heading-primary heading-primary--main--span--2">Movie awards for entrepreneurs</span>
+
         </h1>
         <span class="heading-primary heading-primary--sub"
           >Nominate your favorite movies, watch them shine!</span
@@ -12,8 +14,8 @@
     </section>
     <section class="section-filter">
       <div class="heading-secondary">
-        <h2 class="heading-secondary heading-secondary--main">Search</h2>
-        <span class="heading-secondary heading-secondary--sub"
+        <h2 class="heading-secondary--main">Search</h2>
+        <span class="heading-secondary--sub"
           >Start searching for registered movies in our database</span
         >
       </div>
@@ -26,11 +28,12 @@
     </section>
     <section class="section-listing">
       <div class="heading-secondary">
-        <h2 class="heading-secondary heading-secondary--main">Nominate</h2>
-        <span class="heading-secondary heading-secondary--sub"
+        <h2 class="heading-secondary--main">Nominate</h2>
+        <span class="heading-secondary--sub"
           >Pick five movies that really touched you</span
         >
       </div>
+
       <ng-container *ngIf="movies$ | async as movieItems; else notFound">
         <div class="movie-list">
           <div class="page-control">

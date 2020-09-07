@@ -1,5 +1,5 @@
 body {
-  font-family: "Roboto", sans-serif;
+  font-family: "Montserrat", sans-serif;
   font-weight: 400;
   /*font-size: 16px;*/
   line-height: 1.7;
@@ -9,17 +9,41 @@ body {
 
 .heading-primary {
   &--main {
-    font-size: 5rem;
+    font-size: 7rem;
+    font-family: 'Playfair Display', serif;
+
+    &--span {
+      box-decoration-break: clone;
+
+      &--1, &--2 {
+        display: block;
+      }
+
+      &--1 {
+        line-height: 4rem;
+      }
+
+      &--2 {
+        font-weight: 400;
+      }
+    }
   }
 }
 
 .heading-secondary {
+  margin-bottom: 3rem;
+
   &--main {
     line-height: 3rem;
     font-size: 3rem;
   }
   &--sub {
-    font-size: 1.4rem;
+    font-size: 1.5rem;
   }
+}
+
+.support-text {
+  font-size: 1.4rem;
+  color: $color-medium-gray;
 }
 

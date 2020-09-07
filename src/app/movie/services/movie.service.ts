@@ -14,15 +14,12 @@ export class MovieService {
   private static readonly RESOURCE_URL = `http://www.omdbapi.com/?apikey=${MovieService.API_KEY}&`;
   private static readonly LOCAL_STORAGE_KEY = 'omdbNominatedMovies';
 
-  private nominatedMovies: MovieItem[];
-  nominatedMoviesSubject = new BehaviorSubject<MovieItem[]>(this.nominatedMovies);
+  private nominatedMovies: MovieItem[] = this.getNominatedMoviesFromLocalStorage();
+  readonly nominatedMoviesSubject = new BehaviorSubject<MovieItem[]>(this.nominatedMovies);
 
   constructor(
     private http: HttpClient
-  ) {
-    this.nominatedMovies = JSON.parse(localStorage.getItem(MovieService.LOCAL_STORAGE_KEY));
-    this.nominatedMoviesSubject.next(this.nominatedMovies);
-  }
+  ) {  }
 
   getMovies(title: string, page: string): Observable<MovieItems> {
     return this.http.get<MoviesDTO>(MovieService.RESOURCE_URL, { params: {
@@ -69,6 +66,10 @@ export class MovieService {
 
   getNominatedMovies(): MovieItem[] {
     return [...this.nominatedMovies];
+  }
+
+  getNominatedMoviesFromLocalStorage(): MovieItem[] {
+    return JSON.parse(localStorage.getItem(MovieService.LOCAL_STORAGE_KEY)) ?? [];
   }
 
 

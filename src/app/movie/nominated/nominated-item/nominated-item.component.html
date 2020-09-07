@@ -1,0 +1,18 @@
+<div class="nominated-item">
+  <label class="nominated-item__label">{{ movie.title }}
+  <button class="nominated-item__button"(click)="removeNominated(movie)">
+    <span class="nominated-item__button--icon material-icons">remove_circle</span>
+  </button>
+  </label>
+</div>
+
+    <!-- <ul>
+      <li *ngFor="let movie of nominatedMovies">
+        {{ movie.title }}
+        <button (click)="removeNominated(movie)">
+          <span class="material-icons">
+            remove_circle
+            </span>
+          </button>
+      </li>
+    </ul> -->

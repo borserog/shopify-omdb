@@ -23,10 +23,6 @@ export class NominatedComponent implements OnInit {
     this.nominatedMovies$ = this.movieService.nominatedMoviesSubject;
   }
 
-  removeNominated(movie: MovieItem): void {
-    this.movieService.removeNominatedMovie(movie);
-  }
-
   clearNominated(): void {
     this.movieService.clearNominated();
   }

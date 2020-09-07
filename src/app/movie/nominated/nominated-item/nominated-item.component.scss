@@ -1,0 +1,31 @@
+@import '../../../../styles/abstracts/variables';
+
+* {
+  transition: all .2s;
+}
+
+.nominated-item {
+  border-radius: $border-radius;
+
+  &:hover {
+    background-color: $color-light-gray;
+  }
+
+  &__label {
+    padding: 1.5rem;
+    font-weight: 800;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    margin-right: 1rem;
+  }
+
+  &__button {
+    &--icon {
+      color: $color-red;
+      display: block;
+    }
+  }
+}
