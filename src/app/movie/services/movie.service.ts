@@ -11,7 +11,7 @@ import { map } from 'rxjs/operators';
 })
 export class MovieService {
   private static readonly API_KEY = '1e66e61d';
-  private static readonly RESOURCE_URL = `http://www.omdbapi.com/?apikey=${MovieService.API_KEY}&`;
+  private static readonly RESOURCE_URL = `https://www.omdbapi.com/?apikey=${MovieService.API_KEY}&`;
   private static readonly LOCAL_STORAGE_KEY = 'omdbNominatedMovies';
 
   private nominatedMovies: MovieItem[] = this.getNominatedMoviesFromLocalStorage();
