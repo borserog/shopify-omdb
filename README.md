@@ -4,7 +4,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Live URL
 
-This project is currently available at: https://upbeat-bose-5326f6.netlify.app/;
+This project is currently live at: shopify-challenge-2020.netlify.app
 
 ## Development server
 
